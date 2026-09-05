@@ -1,0 +1,450 @@
+
+/* =========================================
+   RESET
+========================================= */
+
+.reels-wrapper,
+.reels-wrapper * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   MAIN REELS CONTAINER
+========================================= */
+
+.reels-wrapper {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background: #000;
+
+  overscroll-behavior: none;
+
+  z-index: 1;
+}
+
+
+/* =========================================
+   SCROLL CONTAINER
+========================================= */
+
+.reels-page {
+  width: 100%;
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  overscroll-behavior-y: contain;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+
+  touch-action: pan-y;
+}
+
+.reels-page::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================
+   EACH FULL-SCREEN SLIDE
+========================================= */
+
+.reel-slide {
+  position: relative;
+
+  width: 100%;
+  height: 100dvh;
+
+  min-height: 100dvh;
+
+  flex-shrink: 0;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #000;
+}
+
+
+/* =========================================
+   BASE VIDEO
+========================================= */
+
+.reel-video {
+  display: block;
+
+  background: #000;
+
+  outline: none;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =================================================
+   SHORTS — 9:16
+================================================= */
+
+.shorts-feed .reel-video {
+  /*
+   * True 9:16 portrait format.
+   */
+  aspect-ratio: 9 / 16;
+
+  height: 100%;
+
+  width: auto;
+
+  max-width: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =================================================
+   VIDEOS — 16:9
+================================================= */
+
+.videos-feed .reel-video {
+  /*
+   * True 16:9 landscape format.
+   */
+  aspect-ratio: 16 / 9;
+
+  width: min(
+    100%,
+    1280px
+  );
+
+  height: auto;
+
+  max-height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   SHORTS / VIDEOS SWITCH
+========================================= */
+
+.reels-feed-switch {
+  position: fixed;
+
+  left: 50%;
+  bottom: 22px;
+
+  transform: translateX(-50%);
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+
+  padding: 4px;
+
+  border-radius: 999px;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.65
+  );
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  touch-action: manipulation;
+}
+
+
+/* =========================================
+   SWITCH BUTTONS
+========================================= */
+
+.reels-feed-switch button {
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: rgba(
+    255,
+    255,
+    255,
+    0.65
+  );
+
+  padding: 9px 20px;
+
+  border-radius: 999px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================
+   ACTIVE TAB
+========================================= */
+
+.reels-feed-switch
+  button.active {
+  color: #fff;
+
+  background: rgba(
+    255,
+    255,
+    255,
+    0.18
+  );
+}
+
+
+/* =================================================
+   DESKTOP
+================================================= */
+
+@media (min-width: 769px) {
+
+  .reels-page {
+    scroll-snap-type: y mandatory;
+
+    overscroll-behavior-y: none;
+  }
+
+
+  /* -----------------------------------------
+     SHORTS DESKTOP
+  ----------------------------------------- */
+
+  .shorts-feed .reel-video {
+    /*
+     * Maximum portrait width.
+     * Keeps true 9:16.
+     */
+    height: 100dvh;
+
+    width: auto;
+
+    max-width: 100vw;
+
+    aspect-ratio: 9 / 16;
+
+    object-fit: cover;
+  }
+
+
+  /* -----------------------------------------
+     VIDEOS DESKTOP
+  ----------------------------------------- */
+
+  .videos-feed .reel-video {
+    /*
+     * Landscape video stays 16:9.
+     */
+    width: min(
+      90vw,
+      1280px
+    );
+
+    height: auto;
+
+    max-height: 90dvh;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: contain;
+  }
+
+
+  .reels-feed-switch {
+    bottom: 24px;
+  }
+}
+
+
+/* =================================================
+   MOBILE
+================================================= */
+
+@media (max-width: 768px) {
+
+  .reels-wrapper {
+    width: 100%;
+
+    height: 100dvh;
+
+    min-height: 100svh;
+  }
+
+
+  .reels-page {
+    width: 100%;
+
+    height: 100dvh;
+
+    min-height: 100svh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-snap-type: y mandatory;
+
+    scroll-padding: 0;
+
+    overscroll-behavior-y: none;
+
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-y;
+  }
+
+
+  .reel-slide {
+    width: 100%;
+
+    height: 100dvh;
+
+    min-height: 100svh;
+
+    scroll-snap-align: start;
+
+    scroll-snap-stop: always;
+  }
+
+
+  /* -----------------------------------------
+     SHORTS MOBILE — 9:16
+  ----------------------------------------- */
+
+  .shorts-feed .reel-video {
+    width: 100%;
+
+    height: 100%;
+
+    aspect-ratio: 9 / 16;
+
+    object-fit: cover;
+  }
+
+
+  /* -----------------------------------------
+     VIDEOS MOBILE — 16:9
+  ----------------------------------------- */
+
+  .videos-feed .reel-video {
+    /*
+     * IMPORTANT:
+     *
+     * Do NOT use width: 100%;
+     * with height: 100%;
+     *
+     * That would stretch/crop 16:9.
+     */
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: contain;
+  }
+
+
+  /* -----------------------------------------
+     SWITCH
+  ----------------------------------------- */
+
+  .reels-feed-switch {
+    bottom: max(
+      18px,
+      env(safe-area-inset-bottom)
+    );
+  }
+
+
+  .reels-feed-switch button {
+    padding: 9px 17px;
+
+    font-size: 12px;
+  }
+}
+
+
+/* =================================================
+   SMALL MOBILE
+================================================= */
+
+@media (max-width: 380px) {
+
+  .reels-feed-switch {
+    padding: 3px;
+  }
+
+  .reels-feed-switch button {
+    padding: 8px 14px;
+
+    font-size: 11px;
+  }
+}
+
+
+/* =================================================
+   REDUCED MOTION
+================================================= */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+
+  .reels-page {
+    scroll-behavior: auto;
+  }
+
+  .reels-feed-switch button {
+    transition: none;
+  }
+}
